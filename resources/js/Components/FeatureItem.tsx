@@ -1,6 +1,7 @@
 import { Feature } from "@/types";
 import { Link } from "@inertiajs/react";
 import { useState } from "react";
+import FeatureActionsDropdown from "./FeatureActionsDropdown";
 
 export default function FeatureItem({ feature }: { feature: Feature }) {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -48,6 +49,9 @@ export default function FeatureItem({ feature }: { feature: Feature }) {
                             <p>{feature.description}</p>
                         </>
                     )}
+                </div>
+                <div>
+                    <FeatureActionsDropdown feature={feature} />
                 </div>
             </div>
         </div>
