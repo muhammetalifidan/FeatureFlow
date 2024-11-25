@@ -1,7 +1,15 @@
-import { Feature } from "@/types";
+import { Feature, PageProps, User } from "@/types";
 import Dropdown from "./Dropdown";
+import { can } from "@/helpers";
+import { usePage } from "@inertiajs/react";
 
-export default function FeatureActionsDropdown({feature}: {feature: Feature}) {
+export default function FeatureActionsDropdown({ feature }: { feature: Feature }) {
+    const user: User = usePage().props.auth.user;
+
+    if (!can(user, 'manage_features')) {
+        return;
+    }
+
     return (
         <Dropdown>
             <Dropdown.Trigger>
@@ -20,7 +28,7 @@ export default function FeatureActionsDropdown({feature}: {feature: Feature}) {
             </Dropdown.Trigger>
 
             <Dropdown.Content>
-                <Dropdown.Link
+                < Dropdown.Link
                     href={route('feature.edit', feature.id)}
                 >
                     Edit Feature
